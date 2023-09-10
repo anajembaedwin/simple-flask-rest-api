@@ -18,3 +18,9 @@ pip install gunicorn
 touch Procfile
 pip freeze > requirements.txt
 touch app.py
+
+Create the Database Before running the application
+Open a Python shell with >> python3
+Import the database and models >> from app import db, Person
+Create the tables >> db.create_all()
+Exit the Python shell >> exit()
