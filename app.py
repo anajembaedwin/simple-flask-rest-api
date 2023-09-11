@@ -1,11 +1,17 @@
 # import Flask and SQLAlchemy
 from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy, IntegrityError
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import IntegrityError
+import os
+import logging
 
 # set up the application and database
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'  # Use sqlite for simplicity
 db = SQLAlchemy(app)
+
+# set up logging
+logging.basicConfig(filename='app.log', level=logging.DEBUG)
 
 # define the Person model
 class Person(db.Model):
@@ -25,6 +31,7 @@ class Person(db.Model):
 # the API Endpoints
 @app.route('/api', methods=['POST'])
 def create_person():
+    app.logger.info('Processing default request')
     name = request.json['name']
     if not isinstance(name, str):
         return jsonify({'error': 'Invalid input: name must be a string'}), 400
@@ -39,6 +46,7 @@ def create_person():
 
 @app.route('/api/<id>', methods=['GET'])
 def read_person(id):
+    app.logger.info('Processing default request')
     person = Person.query.get(id)
     if person is None:
         return jsonify({'error': 'Person not found!'}), 404
@@ -46,6 +54,7 @@ def read_person(id):
 
 @app.route('/api/<id>', methods=['PUT'])
 def update_person(id):
+    app.logger.info('Processing default request')
     name = request.json['name']
     if not isinstance(name, str):
         return jsonify({'error': 'Invalid input: name must be a string'}), 400
@@ -58,6 +67,7 @@ def update_person(id):
 
 @app.route('/api/<id>', methods=['DELETE'])
 def delete_person(id):
+    app.logger.info('Processing default request')
     person = Person.query.get(id)
     if person is None:
         return jsonify({'error': 'Person not found!'}), 404
@@ -67,10 +77,24 @@ def delete_person(id):
 
 @app.route('/api', methods=['GET'])
 def get_all_persons():
+    app.logger.info('Processing default request')
     persons = Person.query.all()
     return jsonify({'persons': [{'id': person.id, 'name': person.name} for person in persons]}), 200
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    # Log the error
+    app.logger.error(str(e))
+
+    # Return a JSON response with the error message and status code
+    return jsonify({'error': 'An unexpected error occurred'}), 500
 
 
 # Running the Application
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
+
+
+# if __name__ == '__main__':
+#     app.run(debug=True)

@@ -63,8 +63,16 @@ All steps are for Ubuntu (WSL)
     - Create the tables with `db.create_all()`
     - Exit the Python shell with `exit()`
 
-9. Run the application:
+9. Run the application in development environment with debugging turned on:
 
     ```bash
+    export FLASK_ENV=development
+    flask run
+    ```
+
+10. Run the application in production environment with debugging turned off:
+
+    ```bash
+    export FLASK_ENV=production
     flask run
     ```
