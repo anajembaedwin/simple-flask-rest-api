@@ -1,3 +1,7 @@
+# Simple Flask Rest Api
+
+A simple Flask REST API capable of CRUD operations on a "person" resource, interfacing with a database.
+
 # Database Modelling Diagram
 
 UML (Unified Modeling Language) diagram that represents the structure and relationships of the API classes and models.
