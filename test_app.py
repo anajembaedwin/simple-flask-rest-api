@@ -1,7 +1,8 @@
 import unittest
 from app import app, db, Person
+import os
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 
 
 class TestApp(unittest.TestCase):

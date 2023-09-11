@@ -76,3 +76,7 @@ All steps are for Ubuntu (WSL)
     export FLASK_ENV=production
     flask run
     ```
+
+
+pip install psycopg2-binary
+pip freeze > requirements.txt
