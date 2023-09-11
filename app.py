@@ -1,6 +1,6 @@
 # import Flask and SQLAlchemy
 from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, IntegrityError
 
 # set up the application and database
 app = Flask(__name__)
@@ -30,7 +30,11 @@ def create_person():
         return jsonify({'error': 'Invalid input: name must be a string'}), 400
     new_person = Person(name=name)
     db.session.add(new_person)
-    db.session.commit()
+    try:
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify({'error': 'A person with that name already exists'}), 400
     return jsonify({'message': f'Person {new_person.name} created!'}), 201
 
 @app.route('/api/<id>', methods=['GET'])
