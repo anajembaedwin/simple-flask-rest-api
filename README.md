@@ -84,7 +84,7 @@ This is the SQLAlchemy database instance. It doesn’t have any attributes or me
 
 ## Database (db)
 
-## UML diagram Sketch
+## E-R diagram Sketch
 
 ```
       +---------------+            +---------------+
