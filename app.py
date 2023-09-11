@@ -21,6 +21,11 @@ class Person(db.Model):
     def __repr__(self):
         return f'<Person {self.name}>'
 
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+
+# or in the shell
 # Create the Database Before running the application
 # Open a Python shell with >> python3
 # Import the database and models >> from app import db, Person
@@ -29,6 +34,17 @@ class Person(db.Model):
 
 
 # the API Endpoints
+@app.route('/', methods=['GET'])
+def home():
+    return """
+    <h1>Welcome to my Flask API resource!</h1>
+    <p>
+        This is a place where you can interact with the domain request header.<br>
+        Just add <strong>/api</strong> to your request and explore the possibilities.<br>
+        Thank you for visiting and have a great time exploring!
+    </p>
+    """
+
 @app.route('/api', methods=['POST'])
 def create_person():
     app.logger.info('Processing default request')
