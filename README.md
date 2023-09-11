@@ -1,6 +1,53 @@
-# Simple Flask Rest Api
+# Simple Flask REST Api
 
-A simple Flask REST API capable of CRUD operations on a "person" resource, interfacing with a database.
+A simple Flask REST API, built with Flask and SQLAlchemy, capable of CRUD operations on a "person" resource, interfacing with a database.
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+- You need to have Python 3 and pip installed on your machine. You can download Python from the [official website](https://www.python.org/downloads/).
+- The project was built using Windows Subsystem for Linux (WSL), Ubuntu, virtualenv, and Visual Studio Code with a remote connection, so most instructions are for a Linux environment but can also work on Windows.
+
+### Installing
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/anajembaedwin/simple-flask-rest-api.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd simple-flask-rest-api
+   ```
+
+3. Install the required packages:
+
+   ```bash
+   pip install flask flask_sqlalchemy
+   ```
+
+4. Run the application:
+
+   ```bash
+   python app.py
+   ```
+
+The application will be available at `http://localhost:5000` or a preconfigured port.
+
+## API Endpoints
+
+The API has the following endpoints:
+
+- `POST /api`: Creates a new person.
+- `GET /api/<id>`: Fetches details of a person.
+- `PUT /api/<id>`: Updates details of a person.
+- `DELETE /api/<id>`: Deletes a person.
+- `GET /api`: Fetches all persons.
 
 # Database Modelling Diagram
 
@@ -57,6 +104,5 @@ This is the SQLAlchemy database instance. It doesn’t have any attributes or me
 ## UML diagram
 
 ![UML Diagram](flask-api-uml-diagramm.drawio.png)
-
 
 
