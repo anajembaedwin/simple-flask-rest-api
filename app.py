@@ -9,7 +9,7 @@ import logging
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'  # Use sqlite for simplicity
-# postgres://isommie:MOVsapXN8lztQGgV97N4DnfkT03YKzLF@dpg-cjvn8195mpss73937sv0-a.oregon-postgres.render.com/simple_flask_rest_api_db
+
 db = SQLAlchemy(app)
 
 # set up logging

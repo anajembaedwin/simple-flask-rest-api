@@ -124,6 +124,42 @@ curl -X DELETE http://localhost:5000/api/1
 curl http://localhost:5000/api
 ```
 
+The standard formats for requests and responses for each endpoint of the Flask API, using different base URLs for local, Gunicorn, and live server environments:
+
+1. **Create a Person**
+    - Local: `POST http://localhost:5000/api`
+    - Gunicorn: `POST http://127.0.0.1:8000/api/`
+    - Live Server: `POST https://simple-flask-rest-api-y6zs.onrender.com/api`
+    - Request Body: `{"name": "<name of the person>"}`
+    - Response: `{"message": "Person <name of the person> created!"}` with HTTP status code 201
+
+2. **Read a Person**
+    - Local: `GET http://localhost:5000/api/<id>`
+    - Gunicorn: `GET http://127.0.0.1:8000/api/<id>`
+    - Live Server: `GET https://simple-flask-rest-api-y6zs.onrender.com/api/<id>`
+    - Response: `{"id": <id of the person>, "name": "<name of the person>"}` with HTTP status code 200
+
+3. **Update a Person**
+    - Local: `PUT http://localhost:5000/api/<id>`
+    - Gunicorn: `PUT http://127.0.0.1:8000/api/<id>`
+    - Live Server: `PUT https://simple-flask-rest-api-y6zs.onrender.com/api/<id>`
+    - Request Body: `{"name": "<new name of the person>"}`
+    - Response: `{"message": "Person updated to <new name of the person>!"}` with HTTP status code 200
+
+4. **Delete a Person**
+    - Local: `DELETE http://localhost:5000/api/<id>`
+    - Gunicorn: `DELETE http://127.0.0.1:8000/api/<id>`
+    - Live Server: `DELETE https://simple-flask-rest-api-y6zs.onrender.com/api/<id>`
+    - Response: `{"message": "Person <name of the person> deleted!"}` with HTTP status code 200
+
+5. **Get All Persons**
+    - Local: `GET http://localhost:5000/api`
+    - Gunicorn: `GET http://127.0.0.1:8000/api/`
+    - Live Server: `GET https://simple-flask-rest-api-y6zs.onrender.com/api`
+    - Response: `{"persons": [{"id": <id of the person>, "name": "<name of the person>"}, ...]}` with HTTP status code 200
+
+Please replace `<id>` with the actual ID of the person and `<name of the person>` with the actual name of the person. If there's an error, you'll get a response like `{"error": "<error message>"}` with an appropriate HTTP status code.
+
 
 # Limitations and Assumptions
 - The API does not support authentication or authorization. It’s assumed that it’s used in a trusted environment.
